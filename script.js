@@ -36,18 +36,20 @@ function displayLibrary() {
     //Create the element using the createElement method.
     var div = document.createElement("div");
 
+    // let each element know it's place in the array for deletion later
     div.setAttribute("data-bookIndex", index);
-    console.log(index);
 
-    //Set iclass to book
+    //Set class to book
     div.className = 'book';
 
     //Add your content to the DIV
-    div.innerHTML = `<h1>${book.title}</h1><br>
+    div.innerHTML = `   <h1>${book.title}</h1><br>
                         <p>${book.author}<br>
                             ${book.pages}<br>
                             ${book.beenRead}
-                        </p>`;
+                        </p>
+                        <button onclick="deleteBook(${index})">Delete</button>
+                        `;
                             
 
     //Finally, append the element to the HTML body
@@ -81,6 +83,14 @@ function closeForm() {
     document.getElementById("form-container").style.display = "none";
     document.getElementById("form-popup").style.display = "none";
 
+}
+
+function deleteBook(index) {
+    myLibrary.splice(index, 1);
+}
+
+function clearContent(elementId) {
+    document.getElementById(elementId).innerHTML = "";
 }
 
 displayLibrary();
