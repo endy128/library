@@ -48,7 +48,7 @@ function displayLibrary() {
                             ${book.pages}<br>
                             ${book.beenRead}
                         </p>
-                        <button onclick="deleteBook(${index})">Delete</button>
+                        <button onclick='deleteBook(${index}); clearContent("library"); displayLibrary();'>Delete</button>
                         `;
                             
 
