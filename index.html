@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Objects</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="library">
+
+    </div>
+
+    <div id="form-container">
+        <form id="book-form" action="" onsubmit="return false;" method="get">
+            <label for="title">Title</label>
+            <input type="text" id="title"><br>
+            <label for="author">Author</label>
+            <input type="text" id="author"><br>
+            <label for="pages">Pages</label>
+            <input type="number" id="pages"><br>
+    
+            <label for="beenRead">Been Read?</label>
+            <select id="beenRead" name="beenRead">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select>
+            <br>
+            <button id="btn-submit" type="submit" onclick="addBookToLibrary()" value="submit">Submit</button>
+            <button id="btn-cancel" onclick="closeForm()">Cancel</button>
+        </form>
+    </div>
+
+    <button id='btn-show-form' onclick="openForm()">Add Book</button>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
