@@ -48,7 +48,7 @@ function displayLibrary() {
                             ${book.pages}<br>
                             ${book.beenRead}
                         </p>
-                        <button onclick='deleteBook(${index}); clearContent("library"); displayLibrary();'>Delete</button>
+                        <button class="btn-delete">Delete</button>
                         `;
                             
 
@@ -93,4 +93,22 @@ function clearContent(elementId) {
     document.getElementById(elementId).innerHTML = "";
 }
 
+
+
 displayLibrary();
+addButtonEventListeners();
+
+
+function addButtonEventListeners() {
+    const buttons = Array.from(document.querySelectorAll('.btn-delete'));
+    buttons.forEach(button => button.addEventListener("click", () => { 
+        var index = button.getAttribute('data-index');
+        deleteBook(index);
+        clearContent("library"); 
+        displayLibrary();
+        addButtonEventListeners();
+    }));
+}
+
+
+
