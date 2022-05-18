@@ -1,2 +1,2 @@
 # library
-Simple book title & author "library" using JavaScript using arrays and DOM manipulation
+Simple book title & author "library" using JavaScript arrays and DOM manipulation
