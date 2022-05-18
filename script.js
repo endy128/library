@@ -71,15 +71,15 @@ function resetForm() {
 // }
 
 function openForm() {
-    document.getElementById("book-form").style.display = "grid";
-    document.getElementById("form-container").style.display = "block";
+    document.getElementById("form-container").style.display = "grid";
+    document.getElementById("form-popup").style.display = "block";
     // document.getElementById("form-container").backdrop-filter = "blur(10px)";
 
   }
   
 function closeForm() {
-    document.getElementById("book-form").style.display = "none";
     document.getElementById("form-container").style.display = "none";
+    document.getElementById("form-popup").style.display = "none";
 
 }
 

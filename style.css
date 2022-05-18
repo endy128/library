@@ -26,20 +26,25 @@ html, body {
     width: 400px;
 }
 
-#book-form {
+#form-container {
     /* visibility: hidden; */
     display: none;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr) ;
 }
 
-#form-container {
+#form-popup {
     display: none;
     width: 500px;
-    background-color: #555;
+    background-color: rgb(218, 213, 213);
     padding: 24px;
     border-radius: 10px;
     /* backdrop-filter: blur(10px); */
+    z-index: 9;
+    position: fixed;
+    left: 45%;
+    top: 5%;
+    transform: translate(-50%, 5%);
 }
 
 #btn-show-form {
