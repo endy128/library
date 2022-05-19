@@ -79,7 +79,7 @@ function displayLibrary() {
     p.appendChild(br.cloneNode());
 
     const btnDelete = document.createElement("button");
-    const buttonText = document.createTextNode("Delete");
+    const buttonText = document.createTextNode('✗');
     btnDelete.appendChild(buttonText);
     btnDelete.className = "btn-delete";
     btnDelete.setAttribute("data-bookIndex", index);
@@ -147,7 +147,8 @@ function addCheckboxListeners() {
     checkBoxes.forEach(checkBox => checkBox.addEventListener('change', () => { 
     
         // get the index of the book in the library Array
-        var index = checkBox.getAttribute('data-bookIndex');
+        // using parentNode.parentNode get's the dvi's data attribute
+        var index = checkBox.parentNode.parentNode.getAttribute('data-bookIndex');
         // console.log(`Index: ${index}`);
         // console.log(checkBox.checked);
 
