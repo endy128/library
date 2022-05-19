@@ -42,14 +42,47 @@ function displayLibrary() {
     //Set class to book
     div.className = 'book';
 
+    const h1 = document.createElement("h1");
+    const title = document.createTextNode(book.title);
+    h1.appendChild(title);
+    div.appendChild(h1);
+
+    const p = document.createElement("p");
+    const br = document.createElement("br");
+    const author = document.createTextNode(`Author: ${book.author}`);
+    p.appendChild(author);
+    p.appendChild(br);
+   
+
+    const pages = document.createTextNode(`Pages: ${book.pages}`);
+    p.appendChild(pages);
+    p.appendChild(br.cloneNode());
+
+    const beenRead = document.createTextNode(`Read?: ${book.beenRead}`);
+    p.appendChild(beenRead);
+    p.appendChild(br.cloneNode());
+
+
+    const btnDelete = document.createElement("button");
+    const buttonText = document.createTextNode("Delete");
+    btnDelete.appendChild(buttonText);
+    btnDelete.className = "btn-delete";
+    p.appendChild(btnDelete); 
+
+    div.appendChild(p);
+
+
+
+
+
     //Add your content to the DIV
-    div.innerHTML = `   <h1>${book.title}</h1><br>
-                        <p>${book.author}<br>
-                            ${book.pages}<br>
-                            ${book.beenRead}
-                        </p>
-                        <button class="btn-delete">Delete</button>
-                        `;
+    // div.innerHTML = `   <h1>${book.title}</h1><br>
+    //                     <p>${book.author}<br>
+    //                         ${book.pages}<br>
+    //                         ${book.beenRead}
+    //                     </p>
+    //                     <button class="btn-delete">Delete</button>
+    //                     `;
                             
 
     //Finally, append the element to the HTML body
