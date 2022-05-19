@@ -21,9 +21,10 @@ function addBookToLibrary() {
     resetForm();
 }
 
+// populate the array with some example book data
 const book1 = new Book('Lord of the Flies', 'William', 234, false);
 const book2 = new Book('Frankenstein', 'Mary Shelly', 456, false);
-const book3 = new Book('Adventures of Tom Sawyer', 'Mark Twain', 658, 'true');
+const book3 = new Book('Adventures of Tom Sawyer', 'Mark Twain', 658, true);
 const book4 = new Book('Animal Farm', 'George Orwell', 784, true);
 myLibrary.push(book1);
 myLibrary.push(book2);
@@ -42,26 +43,39 @@ function displayLibrary() {
     //Set class to book
     div.className = 'book';
 
+    // add the title to the div
     const h1 = document.createElement("h1");
     const title = document.createTextNode(book.title);
     h1.appendChild(title);
     div.appendChild(h1);
 
+    // create the <p> and begin adding the author
     const p = document.createElement("p");
     const br = document.createElement("br");
     const author = document.createTextNode(`Author: ${book.author}`);
     p.appendChild(author);
     p.appendChild(br);
    
-
+    // add the pages DOM nodes
     const pages = document.createTextNode(`Pages: ${book.pages}`);
     p.appendChild(pages);
     p.appendChild(br.cloneNode());
 
-    const beenRead = document.createTextNode(`Read?: ${book.beenRead}`);
+    const beenRead = document.createTextNode('Read?: ');
     p.appendChild(beenRead);
-    p.appendChild(br.cloneNode());
+    
 
+    const checkBox = document.createElement("input");
+    checkBox.setAttribute("type", "checkbox");
+    if (book.beenRead === true) {
+        checkBox.checked = true;
+    } else {
+    checkBox.checked = false;
+    }
+
+
+    p.appendChild(checkBox);
+    p.appendChild(br.cloneNode());
 
     const btnDelete = document.createElement("button");
     const buttonText = document.createTextNode("Delete");
@@ -69,21 +83,7 @@ function displayLibrary() {
     btnDelete.className = "btn-delete";
     p.appendChild(btnDelete); 
 
-    div.appendChild(p);
-
-
-
-
-
-    //Add your content to the DIV
-    // div.innerHTML = `   <h1>${book.title}</h1><br>
-    //                     <p>${book.author}<br>
-    //                         ${book.pages}<br>
-    //                         ${book.beenRead}
-    //                     </p>
-    //                     <button class="btn-delete">Delete</button>
-    //                     `;
-                            
+    div.appendChild(p);                   
 
     //Finally, append the element to the HTML body
     document.getElementById('library').appendChild(div);
@@ -98,17 +98,10 @@ function resetForm() {
 }
 
 
-// function showForm() {
-//     var element = document.getElementById('book-form');
-//     element.style.visibility = "visible";
-//     var button = document.getElementById('btn-show-form');
-//     button.style.visibility = "hidden";
-// }
 
 function openForm() {
     document.getElementById("form-container").style.display = "grid";
     document.getElementById("form-popup").style.display = "block";
-    // document.getElementById("form-container").backdrop-filter = "blur(10px)";
 
   }
   
