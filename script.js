@@ -16,6 +16,12 @@ function addBookToLibrary() {
     var author = document.getElementById('author').value;
     var pages = document.getElementById('pages').value;
     var beenRead = document.getElementById('beenRead').value;
+    // set to boolean from string input
+    if (beenRead == 'true') {
+        beenRead = true;
+    } else {
+        beenRead = false;
+    }
     const book = new Book (title, author, pages, beenRead);
     myLibrary.push(book);
     resetForm();
@@ -79,10 +85,11 @@ function displayLibrary() {
     p.appendChild(br.cloneNode());
 
     const btnDelete = document.createElement("button");
-    const buttonText = document.createTextNode('✗');
+    const buttonText = document.createTextNode('🗑');
     btnDelete.appendChild(buttonText);
     btnDelete.className = "btn-delete";
     btnDelete.setAttribute("data-bookIndex", index);
+    btnDelete.setAttribute("title", "Delete book");
     p.appendChild(btnDelete); 
 
     div.appendChild(p);                   
@@ -96,7 +103,7 @@ function resetForm() {
     document.getElementById('title').value = '';
     document.getElementById('author').value = '';
     document.getElementById('pages').value = '';
-    document.getElementById('beenRead').value = 'false';   
+    document.getElementById('beenRead').value = false;   
 }
 
 
@@ -125,7 +132,8 @@ function clearContent(elementId) {
 
 displayLibrary();
 addButtonEventListeners();
-addCheckboxListeners();
+// addCheckboxListeners();
+addSubmitButtonEventListener();
 
 
 function addButtonEventListeners() {
@@ -137,20 +145,25 @@ function addButtonEventListeners() {
         clearContent('library'); 
         displayLibrary();
         addButtonEventListeners();
-        addCheckboxListeners();
+        // addCheckboxListeners();
     }));
-}
+
+    const showFormButton = document.getElementById('btn-show-form');
+    showFormButton.addEventListener("click", () => { 
+       openForm();
+    });
+
+    const closeFormButton = document.getElementById('btn-cancel');
+    closeFormButton.addEventListener("click", () => { 
+      closeForm();
+    });
 
 
-function addCheckboxListeners() {
     const checkBoxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
     checkBoxes.forEach(checkBox => checkBox.addEventListener('change', () => { 
-    
         // get the index of the book in the library Array
         // using parentNode.parentNode get's the dvi's data attribute
         var index = checkBox.parentNode.parentNode.getAttribute('data-bookIndex');
-        // console.log(`Index: ${index}`);
-        // console.log(checkBox.checked);
 
         // if the check box changes (above) then change the corresponding object's attribute 
         if (checkBox.checked === true) {
@@ -161,3 +174,37 @@ function addCheckboxListeners() {
 
     }));
 }
+
+
+// function addCheckboxListeners() {
+//     const checkBoxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+//     checkBoxes.forEach(checkBox => checkBox.addEventListener('change', () => { 
+    
+//         // get the index of the book in the library Array
+//         // using parentNode.parentNode get's the dvi's data attribute
+//         var index = checkBox.parentNode.parentNode.getAttribute('data-bookIndex');
+//         // console.log(`Index: ${index}`);
+//         // console.log(checkBox.checked);
+
+//         // if the check box changes (above) then change the corresponding object's attribute 
+//         if (checkBox.checked === true) {
+//             myLibrary[index].beenRead = true;
+//         } else {
+//             myLibrary[index].beenRead = false;
+//         }
+
+//     }));
+// }
+
+
+function addSubmitButtonEventListener() {
+    const button = document.getElementById('btn-submit');
+     button.addEventListener("click", () => { 
+        addBookToLibrary(); 
+        closeForm(); 
+        clearContent("library"); 
+        displayLibrary();
+        addButtonEventListeners();
+    });
+}
+

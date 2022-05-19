@@ -25,6 +25,7 @@ html, body {
     margin-bottom: 24px;
     width: 400px;
     position: relative;
+    padding: 24px;
 }
 
 #form-container {
@@ -101,14 +102,15 @@ html, body {
 }
 
 .btn-delete {
-    background-color: rgb(255, 0, 0);
+    background-color: white;
     border-radius: 50px;
-    border: 1px solid rgba(141, 0, 0, 0.685);
-    height: 24px;
-    width: 24px;
+    border: none;
+    height: 36px;
+    width: 36px;
     font-size: 18px;
-    color: black;
-    box-shadow: 5px 5px 5px rgba(146, 146, 146, 0.5);
+    color: white;
+    /* font-weight: bolder; */
+    /* box-shadow: 5px 5px 10px rgba(146, 146, 146, 0.5); */
     position: absolute;
     top: 10px;
     right: 10px;
