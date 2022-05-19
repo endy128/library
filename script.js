@@ -67,6 +67,7 @@ function displayLibrary() {
 
     const checkBox = document.createElement("input");
     checkBox.setAttribute("type", "checkbox");
+    checkBox.setAttribute("data-bookIndex", index);
     if (book.beenRead === true) {
         checkBox.checked = true;
     } else {
@@ -81,6 +82,7 @@ function displayLibrary() {
     const buttonText = document.createTextNode("Delete");
     btnDelete.appendChild(buttonText);
     btnDelete.className = "btn-delete";
+    btnDelete.setAttribute("data-bookIndex", index);
     p.appendChild(btnDelete); 
 
     div.appendChild(p);                   
@@ -123,18 +125,38 @@ function clearContent(elementId) {
 
 displayLibrary();
 addButtonEventListeners();
+addCheckboxListeners();
 
 
 function addButtonEventListeners() {
     const buttons = Array.from(document.querySelectorAll('.btn-delete'));
     buttons.forEach(button => button.addEventListener("click", () => { 
-        var index = button.getAttribute('data-index');
+        var index = button.getAttribute('data-bookIndex');
         deleteBook(index);
-        clearContent("library"); 
+        // console.log(`Deleted Index: ${index}`);
+        clearContent('library'); 
         displayLibrary();
         addButtonEventListeners();
+        addCheckboxListeners();
     }));
 }
 
 
+function addCheckboxListeners() {
+    const checkBoxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+    checkBoxes.forEach(checkBox => checkBox.addEventListener('change', () => { 
+    
+        // get the index of the book in the library Array
+        var index = checkBox.getAttribute('data-bookIndex');
+        // console.log(`Index: ${index}`);
+        // console.log(checkBox.checked);
 
+        // if the check box changes (above) then change the corresponding object's attribute 
+        if (checkBox.checked === true) {
+            myLibrary[index].beenRead = true;
+        } else {
+            myLibrary[index].beenRead = false;
+        }
+
+    }));
+}
