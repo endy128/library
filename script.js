@@ -28,10 +28,10 @@ function addBookToLibrary() {
 }
 
 // populate the array with some example book data
-const book1 = new Book('Lord of the Flies', 'William', 234, false);
-const book2 = new Book('Frankenstein', 'Mary Shelly', 456, false);
-const book3 = new Book('Adventures of Tom Sawyer', 'Mark Twain', 658, true);
-const book4 = new Book('Animal Farm', 'George Orwell', 784, true);
+const book1 = new Book('Lord of the Flies', 'William Golding', 224, false);
+const book2 = new Book('Frankenstein', 'Mary Shelly', 280, false);
+const book3 = new Book('Adventures of Tom Sawyer', 'Mark Twain', 368, true);
+const book4 = new Book('Animal Farm', 'George Orwell', 112, true);
 myLibrary.push(book1);
 myLibrary.push(book2);
 myLibrary.push(book3);
@@ -162,7 +162,7 @@ function addButtonEventListeners() {
     const checkBoxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
     checkBoxes.forEach(checkBox => checkBox.addEventListener('change', () => { 
         // get the index of the book in the library Array
-        // using parentNode.parentNode get's the dvi's data attribute
+        // using parentNode.parentNode get's the div's data attribute
         var index = checkBox.parentNode.parentNode.getAttribute('data-bookIndex');
 
         // if the check box changes (above) then change the corresponding object's attribute 
