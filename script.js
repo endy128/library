@@ -1,9 +1,20 @@
 let myLibrary = [
-    { title: 'Lord of the Flies', author: 'William Golding', pages: 224, beenRead: false},
-    { title: 'Frankenstein', author: 'Mary Shelly', pages: 280, beenRead: false},
-    { title: 'Adventures of Tom Sawyer', author: 'Mark Twain', pages: 368, beenRead: true},
-    { title: 'Animal Farm', author: 'George Orwell', pages: 112, beenRead: true}
+    // { title: 'Lord of the Flies', author: 'William Golding', pages: 224, beenRead: false},
+    // { title: 'Frankenstein', author: 'Mary Shelly', pages: 280, beenRead: false},
+    // { title: 'Adventures of Tom Sawyer', author: 'Mark Twain', pages: 368, beenRead: true},
+    // { title: 'Animal Farm', author: 'George Orwell', pages: 112, beenRead: true}
 ];
+
+// populate the array with some example book data
+// use push() so the objects receive the functions from the prototype
+const book1 = new Book('Lord of the Flies', 'William Golding', 224, false);
+const book2 = new Book('Frankenstein', 'Mary Shelly', 280, false);
+const book3 = new Book('Adventures of Tom Sawyer', 'Mark Twain', 368, true);
+const book4 = new Book('Animal Farm', 'George Orwell', 112, true);
+myLibrary.push(book1);
+myLibrary.push(book2);
+myLibrary.push(book3);
+myLibrary.push(book4);
 
 function Book(title, author, pages, beenRead) {
     this.title = title;
@@ -12,6 +23,13 @@ function Book(title, author, pages, beenRead) {
     this.beenRead = beenRead;
     this.info = function () {
         return(`${this.title} by ${this.author}, ${this.pages} pages, ${this.beenRead}`);
+    }
+    this.toggleRead = function() {
+        if (this.beenRead === true) {
+            this.beenRead = false;
+        } else {
+            this.beenRead = true;
+        }
     }
 }
 
@@ -163,36 +181,19 @@ function addButtonEventListeners() {
         // using parentNode.parentNode get's the div's data attribute
         var index = checkBox.parentNode.parentNode.getAttribute('data-bookIndex');
 
+        // if the check box is changed, toggle it's value
+        myLibrary[index].toggleRead(); 
+
         // if the check box changes (above) then change the corresponding object's attribute 
-        if (checkBox.checked === true) {
-            myLibrary[index].beenRead = true;
-        } else {
-            myLibrary[index].beenRead = false;
-        }
+        // if (checkBox.checked === true) {
+        //     myLibrary[index].beenRead = true;
+        // } else {
+        //     myLibrary[index].beenRead = false;
+        // }
 
     }));
 }
 
-
-// function addCheckboxListeners() {
-//     const checkBoxes = Array.from(document.querySelectorAll('input[type='checkbox']'));
-//     checkBoxes.forEach(checkBox => checkBox.addEventListener('change', () => { 
-    
-//         // get the index of the book in the library Array
-//         // using parentNode.parentNode get's the dvi's data attribute
-//         var index = checkBox.parentNode.parentNode.getAttribute('data-bookIndex');
-//         // console.log(`Index: ${index}`);
-//         // console.log(checkBox.checked);
-
-//         // if the check box changes (above) then change the corresponding object's attribute 
-//         if (checkBox.checked === true) {
-//             myLibrary[index].beenRead = true;
-//         } else {
-//             myLibrary[index].beenRead = false;
-//         }
-
-//     }));
-// }
 
 
 function addSubmitButtonEventListener() {
