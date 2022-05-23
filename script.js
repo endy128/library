@@ -189,8 +189,7 @@ function addButtonEventListeners() {
     const checkBoxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
     checkBoxes.forEach(checkBox => checkBox.addEventListener('change', () => { 
         // get the index of the book in the library Array
-        // using parentNode.parentNode get's the div's data attribute
-        var index = checkBox.parentNode.parentNode.getAttribute('data-bookIndex');
+        var index = checkBox.getAttribute('data-bookindex');
 
         // if the check box is changed, toggle it's value
         myLibrary[index].toggleRead(); 
