@@ -69,22 +69,34 @@ function displayLibrary() {
     h1.appendChild(title);
     div.appendChild(h1);
 
-    // create the <p> and begin adding the author
-    const p = document.createElement('p');
-    const br = document.createElement('br');
-    const author = document.createTextNode(`Author: ${book.author}`);
-    p.appendChild(author);
-    p.appendChild(br);
-   
-    // add the pages DOM nodes
-    const pages = document.createTextNode(`Pages: ${book.pages}`);
-    p.appendChild(pages);
-    p.appendChild(br.cloneNode());
+    // create the <table> and begin adding the fields
+    const table = document.createElement('table');
+    var row = table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
 
-    const beenRead = document.createTextNode('Read?: ');
-    p.appendChild(beenRead);
+    const author = document.createTextNode('Author: ');
+    const authorValue = document.createTextNode(book.author);
+    cell1.appendChild(author);
+    cell2.appendChild(authorValue);
+
+    row = table.insertRow(1);
+    cell1 = row.insertCell(0);
+    cell2 = row.insertCell(1);
+    const pages = document.createTextNode('Pages: ');
+    const pagesValue = document.createTextNode(book.pages);
+    cell1.appendChild(pages);
+    cell2.appendChild(pagesValue);
     
+ 
+    row = table.insertRow(2);
+    cell1 = row.insertCell(0);
+    cell2 = row.insertCell(1);
+    const beenRead = document.createTextNode('Read?: ');
+    // const pagesValue = document.createTextNode(book.pages);
+    cell1.appendChild(beenRead);
 
+    // create a check box, set it according to the book's attribute
     const checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
     checkBox.setAttribute('data-bookIndex', index);
@@ -93,22 +105,21 @@ function displayLibrary() {
     } else {
     checkBox.checked = false;
     }
+    cell2.appendChild(checkBox);
 
-
-    p.appendChild(checkBox);
-    p.appendChild(br.cloneNode());
-
+    // add the completed table to the div
+    div.appendChild(table);    
+    
+    // create the delete button outside of the table
     const btnDelete = document.createElement('button');
-    // const buttonText = document.createTextNode('🗑');
     const buttonImage = document.createElement('img');
     buttonImage.src = 'assets/trash-can-outline.svg';
     btnDelete.appendChild(buttonImage);
     btnDelete.className = 'btn-delete';
     btnDelete.setAttribute('data-bookIndex', index);
+    // adds a nice tool tip when the ouse hovers over the button
     btnDelete.setAttribute('title', 'Delete book');
-    p.appendChild(btnDelete); 
-
-    div.appendChild(p);                   
+    div.appendChild(btnDelete); 
 
     //Finally, append the element to the HTML body
     document.getElementById('library').appendChild(div);
@@ -183,13 +194,6 @@ function addButtonEventListeners() {
 
         // if the check box is changed, toggle it's value
         myLibrary[index].toggleRead(); 
-
-        // if the check box changes (above) then change the corresponding object's attribute 
-        // if (checkBox.checked === true) {
-        //     myLibrary[index].beenRead = true;
-        // } else {
-        //     myLibrary[index].beenRead = false;
-        // }
 
     }));
 }
