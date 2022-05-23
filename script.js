@@ -1,4 +1,9 @@
-let myLibrary = [];
+let myLibrary = [
+    { title: 'Lord of the Flies', author: 'William Golding', pages: 224, beenRead: false},
+    { title: 'Frankenstein', author: 'Mary Shelly', pages: 280, beenRead: false},
+    { title: 'Adventures of Tom Sawyer', author: 'Mark Twain', pages: 368, beenRead: true},
+    { title: 'Animal Farm', author: 'George Orwell', pages: 112, beenRead: true}
+];
 
 function Book(title, author, pages, beenRead) {
     this.title = title;
@@ -27,37 +32,28 @@ function addBookToLibrary() {
     resetForm();
 }
 
-// populate the array with some example book data
-const book1 = new Book('Lord of the Flies', 'William Golding', 224, false);
-const book2 = new Book('Frankenstein', 'Mary Shelly', 280, false);
-const book3 = new Book('Adventures of Tom Sawyer', 'Mark Twain', 368, true);
-const book4 = new Book('Animal Farm', 'George Orwell', 112, true);
-myLibrary.push(book1);
-myLibrary.push(book2);
-myLibrary.push(book3);
-myLibrary.push(book4);
 
 function displayLibrary() {
     myLibrary.forEach((book, index) => {
     // insert book div into html body
     //Create the element using the createElement method.
-    var div = document.createElement("div");
+    var div = document.createElement('div');
 
     // let each element know it's place in the array for deletion later
-    div.setAttribute("data-bookIndex", index);
+    div.setAttribute('data-bookIndex', index);
 
     //Set class to book
     div.className = 'book';
 
     // add the title to the div
-    const h1 = document.createElement("h1");
+    const h1 = document.createElement('h1');
     const title = document.createTextNode(book.title);
     h1.appendChild(title);
     div.appendChild(h1);
 
     // create the <p> and begin adding the author
-    const p = document.createElement("p");
-    const br = document.createElement("br");
+    const p = document.createElement('p');
+    const br = document.createElement('br');
     const author = document.createTextNode(`Author: ${book.author}`);
     p.appendChild(author);
     p.appendChild(br);
@@ -71,9 +67,9 @@ function displayLibrary() {
     p.appendChild(beenRead);
     
 
-    const checkBox = document.createElement("input");
-    checkBox.setAttribute("type", "checkbox");
-    checkBox.setAttribute("data-bookIndex", index);
+    const checkBox = document.createElement('input');
+    checkBox.setAttribute('type', 'checkbox');
+    checkBox.setAttribute('data-bookIndex', index);
     if (book.beenRead === true) {
         checkBox.checked = true;
     } else {
@@ -84,12 +80,14 @@ function displayLibrary() {
     p.appendChild(checkBox);
     p.appendChild(br.cloneNode());
 
-    const btnDelete = document.createElement("button");
-    const buttonText = document.createTextNode('🗑');
-    btnDelete.appendChild(buttonText);
-    btnDelete.className = "btn-delete";
-    btnDelete.setAttribute("data-bookIndex", index);
-    btnDelete.setAttribute("title", "Delete book");
+    const btnDelete = document.createElement('button');
+    // const buttonText = document.createTextNode('🗑');
+    const buttonImage = document.createElement('img');
+    buttonImage.src = 'assets/trash-can-outline.svg';
+    btnDelete.appendChild(buttonImage);
+    btnDelete.className = 'btn-delete';
+    btnDelete.setAttribute('data-bookIndex', index);
+    btnDelete.setAttribute('title', 'Delete book');
     p.appendChild(btnDelete); 
 
     div.appendChild(p);                   
@@ -109,14 +107,14 @@ function resetForm() {
 
 
 function openForm() {
-    document.getElementById("form-container").style.display = "grid";
-    document.getElementById("form-popup").style.display = "block";
+    document.getElementById('form-container').style.display = 'grid';
+    document.getElementById('form-popup').style.display = 'block';
 
   }
   
 function closeForm() {
-    document.getElementById("form-container").style.display = "none";
-    document.getElementById("form-popup").style.display = "none";
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('form-popup').style.display = 'none';
 
 }
 
@@ -125,7 +123,7 @@ function deleteBook(index) {
 }
 
 function clearContent(elementId) {
-    document.getElementById(elementId).innerHTML = "";
+    document.getElementById(elementId).innerHTML = '';
 }
 
 
@@ -138,7 +136,7 @@ addSubmitButtonEventListener();
 
 function addButtonEventListeners() {
     const buttons = Array.from(document.querySelectorAll('.btn-delete'));
-    buttons.forEach(button => button.addEventListener("click", () => { 
+    buttons.forEach(button => button.addEventListener('click', () => { 
         var index = button.getAttribute('data-bookIndex');
         deleteBook(index);
         // console.log(`Deleted Index: ${index}`);
@@ -149,12 +147,12 @@ function addButtonEventListeners() {
     }));
 
     const showFormButton = document.getElementById('btn-show-form');
-    showFormButton.addEventListener("click", () => { 
+    showFormButton.addEventListener('click', () => { 
        openForm();
     });
 
     const closeFormButton = document.getElementById('btn-cancel');
-    closeFormButton.addEventListener("click", () => { 
+    closeFormButton.addEventListener('click', () => { 
       closeForm();
     });
 
@@ -177,7 +175,7 @@ function addButtonEventListeners() {
 
 
 // function addCheckboxListeners() {
-//     const checkBoxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+//     const checkBoxes = Array.from(document.querySelectorAll('input[type='checkbox']'));
 //     checkBoxes.forEach(checkBox => checkBox.addEventListener('change', () => { 
     
 //         // get the index of the book in the library Array
@@ -199,10 +197,10 @@ function addButtonEventListeners() {
 
 function addSubmitButtonEventListener() {
     const button = document.getElementById('btn-submit');
-     button.addEventListener("click", () => { 
+     button.addEventListener('click', () => { 
         addBookToLibrary(); 
         closeForm(); 
-        clearContent("library"); 
+        clearContent('library'); 
         displayLibrary();
         addButtonEventListeners();
     });
