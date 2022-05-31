@@ -5,6 +5,28 @@ let myLibrary = [
     // { title: 'Animal Farm', author: 'George Orwell', pages: 112, beenRead: true}
 ];
 
+
+
+class Book {
+    constructor(title, author, pages, beenRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.beenRead = beenRead;
+    }
+    info() {
+        return(`${this.title} by ${this.author}, ${this.pages} pages, ${this.beenRead}`);
+    }
+    
+    toggleRead() {
+        if (this.beenRead === true) {
+            this.beenRead = false;
+        } else {
+            this.beenRead = true;
+        }
+    }
+}
+
 // populate the array with some example book data
 // use push() so the objects receive the functions from the prototype
 const book1 = new Book('Lord of the Flies', 'William Golding', 224, false);
@@ -15,23 +37,6 @@ myLibrary.push(book1);
 myLibrary.push(book2);
 myLibrary.push(book3);
 myLibrary.push(book4);
-
-function Book(title, author, pages, beenRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.beenRead = beenRead;
-    this.info = function () {
-        return(`${this.title} by ${this.author}, ${this.pages} pages, ${this.beenRead}`);
-    }
-    this.toggleRead = function() {
-        if (this.beenRead === true) {
-            this.beenRead = false;
-        } else {
-            this.beenRead = true;
-        }
-    }
-}
 
 
 function addBookToLibrary() {
