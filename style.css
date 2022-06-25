@@ -101,6 +101,11 @@ html, body {
     opacity: 0.8;
 }
 
+#btn-cancel,
+#btn-submit {
+    font-size: 1em;
+}
+
 .btn-delete {
     background-color: white;
     border-radius: 50px;
@@ -162,3 +167,13 @@ th, td {
 td:nth-child(1) {
     text-align: right;
 }
+
+option, 
+select {
+    font-size: 18px;;
+}
+
+input[type=checkbox] {
+    /* visibility: hidden; */
+    cursor: pointer;
+  }

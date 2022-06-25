@@ -5,8 +5,6 @@ let myLibrary = [
     // { title: 'Animal Farm', author: 'George Orwell', pages: 112, beenRead: true}
 ];
 
-
-
 class Book {
     constructor(title, author, pages, beenRead) {
         this.title = title;
@@ -25,7 +23,7 @@ class Book {
             this.beenRead = true;
         }
     }
-}
+};
 
 // populate the array with some example book data
 // use push() so the objects receive the functions from the prototype
@@ -40,10 +38,10 @@ myLibrary.push(book4);
 
 
 function addBookToLibrary() {
-    var title = document.getElementById('title').value;
-    var author = document.getElementById('author').value;
-    var pages = document.getElementById('pages').value;
-    var beenRead = document.getElementById('beenRead').value;
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
+    const beenRead = document.getElementById('beenRead').value;
     // set to boolean from string input
     if (beenRead == 'true') {
         beenRead = true;
@@ -55,12 +53,54 @@ function addBookToLibrary() {
     resetForm();
 }
 
+const createTable = (book, index) => {
+        // create the <table> and begin adding the fields
+        const table = document.createElement('table');
+        let row = table.insertRow(0);
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+    
+        const author = document.createTextNode('Author:');
+        const authorValue = document.createTextNode(book.author);
+        cell1.appendChild(author);
+        cell2.appendChild(authorValue);
+    
+        row = table.insertRow(1);
+        cell1 = row.insertCell(0);
+        cell2 = row.insertCell(1);
+        const pages = document.createTextNode('Pages:');
+        const pagesValue = document.createTextNode(book.pages);
+        cell1.appendChild(pages);
+        cell2.appendChild(pagesValue);
+        
+     
+        row = table.insertRow(2);
+        cell1 = row.insertCell(0);
+        cell2 = row.insertCell(1);
+        const beenRead = document.createTextNode('Read:');
+        // const pagesValue = document.createTextNode(book.pages);
+        cell1.appendChild(beenRead);
+    
+        // create a check box, set it according to the book's attribute
+        const checkBox = document.createElement('input');
+        checkBox.setAttribute('type', 'checkbox');
+        checkBox.setAttribute('data-bookIndex', index);
+        if (book.beenRead === true) {
+            checkBox.checked = true;
+        } else {
+        checkBox.checked = false;
+        }
+        cell2.appendChild(checkBox);
+
+        return table;
+}
+
 
 function displayLibrary() {
     myLibrary.forEach((book, index) => {
     // insert book div into html body
     //Create the element using the createElement method.
-    var div = document.createElement('div');
+    const div = document.createElement('div');
 
     // let each element know it's place in the array for deletion later
     div.setAttribute('data-bookIndex', index);
@@ -74,45 +114,8 @@ function displayLibrary() {
     h1.appendChild(title);
     div.appendChild(h1);
 
-    // create the <table> and begin adding the fields
-    const table = document.createElement('table');
-    var row = table.insertRow(0);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-
-    const author = document.createTextNode('Author: ');
-    const authorValue = document.createTextNode(book.author);
-    cell1.appendChild(author);
-    cell2.appendChild(authorValue);
-
-    row = table.insertRow(1);
-    cell1 = row.insertCell(0);
-    cell2 = row.insertCell(1);
-    const pages = document.createTextNode('Pages: ');
-    const pagesValue = document.createTextNode(book.pages);
-    cell1.appendChild(pages);
-    cell2.appendChild(pagesValue);
-    
- 
-    row = table.insertRow(2);
-    cell1 = row.insertCell(0);
-    cell2 = row.insertCell(1);
-    const beenRead = document.createTextNode('Read?: ');
-    // const pagesValue = document.createTextNode(book.pages);
-    cell1.appendChild(beenRead);
-
-    // create a check box, set it according to the book's attribute
-    const checkBox = document.createElement('input');
-    checkBox.setAttribute('type', 'checkbox');
-    checkBox.setAttribute('data-bookIndex', index);
-    if (book.beenRead === true) {
-        checkBox.checked = true;
-    } else {
-    checkBox.checked = false;
-    }
-    cell2.appendChild(checkBox);
-
     // add the completed table to the div
+    const table = createTable(book, index);
     div.appendChild(table);    
     
     // create the delete button outside of the table
