@@ -41,7 +41,7 @@ function addBookToLibrary() {
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
-    const beenRead = document.getElementById('beenRead').value;
+    let beenRead = document.getElementById('beenRead').value;
     // set to boolean from string input
     if (beenRead == 'true') {
         beenRead = true;
@@ -50,7 +50,6 @@ function addBookToLibrary() {
     }
     const book = new Book (title, author, pages, beenRead);
     myLibrary.push(book);
-    resetForm();
 }
 
 const createTable = (book, index) => {
@@ -146,8 +145,8 @@ function resetForm() {
 function openForm() {
     document.getElementById('form-container').style.display = 'grid';
     document.getElementById('form-popup').style.display = 'block';
-
-  }
+    document.getElementById('title').focus();
+}
   
 function closeForm() {
     document.getElementById('form-container').style.display = 'none';
@@ -197,7 +196,7 @@ function addButtonEventListeners() {
     const checkBoxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
     checkBoxes.forEach(checkBox => checkBox.addEventListener('change', () => { 
         // get the index of the book in the library Array
-        var index = checkBox.getAttribute('data-bookindex');
+        var index = checkBox.getAttribute('data-bookIndex');
 
         // if the check box is changed, toggle it's value
         myLibrary[index].toggleRead(); 
@@ -205,16 +204,25 @@ function addButtonEventListeners() {
     }));
 }
 
+const isFormValid = () => {
+    return true;
+}
 
 
 function addSubmitButtonEventListener() {
     const button = document.getElementById('btn-submit');
      button.addEventListener('click', () => { 
+        if (isFormValid() === true) {
         addBookToLibrary(); 
+        resetForm();
         closeForm(); 
         clearContent('library'); 
         displayLibrary();
         addButtonEventListeners();
+        } else {
+            console.log("Form Error");
+        }
     });
 }
+
 

@@ -95,7 +95,7 @@ html, body {
 
 #btn-submit {
     background-color: rgb(65, 74, 209);
-    color: rgb(0, 0, 0);
+    color: white;
     border: none;
     cursor: pointer;
     opacity: 0.8;
@@ -176,4 +176,7 @@ select {
 input[type=checkbox] {
     /* visibility: hidden; */
     cursor: pointer;
-  }
+}
+
+
+
