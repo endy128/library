@@ -18,20 +18,34 @@
 
 
     <div id="form-popup">
-        <form id="form-container" action="" onsubmit="return false;" method="get">
-            <label for="title" >Title</label>
-            <input type="text" id="title" name="title" required>
-            <label for="author">Author</label>
-            <input type="text" id="author" name="author" required>
-            <label for="pages">Pages</label>
-            <input type="number" id="pages" name="pages" required>
-            <label for="beenRead">Read</label>
-            <select id="beenRead" name="beenRead">
-                <option value="false">False</option>
-                <option value="true">True</option>
-            </select>
-            <button id="btn-cancel" type="button">Cancel</button>
-            <button id="btn-submit" type="submit">Submit</button>
+        <form id="form-container" action="" onsubmit="return false;" method="get" novalidate>
+            <label for="title">
+                <span>Title</span>
+                <input type="text" id="title" name="title" required>
+                <span class="error" aria-live="polite"></span>
+            </label>
+            <label for="author">
+                <span>Author</span>
+                <input type="text" id="author" name="author" required>
+                <span class="error" aria-live="polite"></span>
+            </label>
+            <label for="pages">
+                Pages
+                <input type="number" id="pages" name="pages" required>
+                <span class="error" aria-live="polite"></span>
+            </label>
+            <label for="beenRead">
+                <span>Read</span>
+                <select id="beenRead" name="beenRead">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                </select>
+                <span class="error" aria-live="polite"></span>
+            </label>
+            <div class="buttons">
+                <button id="btn-cancel" type="button">Cancel</button>
+                <button id="btn-submit" type="submit">Submit</button>
+            </div>
         </form>
     </div>
 

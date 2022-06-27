@@ -138,6 +138,11 @@ function resetForm() {
     document.getElementById('author').value = '';
     document.getElementById('pages').value = '';
     document.getElementById('beenRead').value = false;   
+    document.querySelector('#title + span.error').innerHTML = '';
+    document.querySelector('#author + span.error').innerHTML = '';
+    document.querySelector('#pages + span.error').innerHTML = '';
+    document.querySelector('#beenRead + span.error').innerHTML = '';
+
 }
 
 
@@ -189,7 +194,8 @@ function addButtonEventListeners() {
 
     const closeFormButton = document.getElementById('btn-cancel');
     closeFormButton.addEventListener('click', () => { 
-      closeForm();
+        resetForm();
+        closeForm();
     });
 
 
@@ -205,7 +211,29 @@ function addButtonEventListeners() {
 }
 
 const isFormValid = () => {
-    return true;
+    const title = document.getElementById("title");
+    const author = document.getElementById("author");
+    const pages = document.getElementById("pages");
+    const beenRead = document.getElementById("beenRead");
+    document.querySelector('#title + span.error').innerHTML = '';
+    document.querySelector('#author + span.error').innerHTML = '';
+    document.querySelector('#pages + span.error').innerHTML = '';
+    document.querySelector('#beenRead + span.error').innerHTML = '';
+
+
+
+    if (!title.checkValidity()) {
+        document.querySelector('#title + span.error').innerHTML = title.validationMessage;
+    } else if (!author.checkValidity()) {
+        document.querySelector('#author + span.error').innerHTML = author.validationMessage;
+    } else if (!pages.checkValidity()) {
+        document.querySelector('#pages + span.error').innerHTML = pages.validationMessage;
+    } else if (!beenRead.checkValidity()) {
+        document.querySelector('#beenRead + span.error').innerHTML = beenRead.validationMessage;
+    } else {
+        return true;
+    }
+
 }
 
 
@@ -224,5 +252,6 @@ function addSubmitButtonEventListener() {
         }
     });
 }
+
 
 
